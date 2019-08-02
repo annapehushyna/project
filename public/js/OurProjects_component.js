@@ -11,13 +11,6 @@ class OurProjects extends HTMLElement{
           great works for our clients">
           </description-component>
           </div>
-          <div class="OurProjects_btns">
-          <button>All</button>
-          <button>Mobile Apps</button>
-          <button>Identities</button>
-          <button>Interior Design</button>
-          <button>UI/UX</button>
-          </div>
           <div class="OurProjects_cont">
           <project-component image="./images/Ibhaar-img.svg"></project-component>
           <project-component image="./images/modern-soccer-img.svg"></project-component>

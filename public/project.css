@@ -167,28 +167,111 @@ body {
   margin-right: 100px;
   min-width: 450px;
 }
-.HeaderBottom nav ul {
-  height: 100%;
-  width: 100%;
-  display: flex;
+@media screen and (max-width: 900px) {
+  #MenuToggle {
+    display: block;
+    position: relative;
+    top: 25px;
+    left: 25px;
+    z-index: 5;
+    user-select: none;
+  }
+  #MenuToggle input {
+    display: block;
+    width: 70px;
+    height: 72px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+  }
+  #MenuToggle span {
+    display: block;
+    width: 43px;
+    height: 7px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #cccccf;
+    border-radius: 3px;
+    z-index: 1;
+    transform-origin: 4px 0px;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+      background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+  }
+  #MenuToggle span:first-child {
+    transform-origin: 0% 0%;
+  }
+  #MenuToggle span:nth-last-child(2) {
+    transform-origin: 0% 100%;
+  }
+  #MenuToggle input:checked ~ span {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+  }
+  #MenuToggle input:checked ~ span:nth-last-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+  }
+  #MenuToggle input:checked ~ span:nth-last-child(2) {
+    transform: rotate(-45deg) translate(0, -1px);
+  }
+  #MainMenu {
+    position: absolute;
+    width: 300px;
+    margin: -65px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+    background: #ededed;
+    color: #494c4d;
+    list-style-type: none;
+    left: -300px;
+    transform: none;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+  }
+  #MainMenu li {
+    padding: 10px 0;
+    font-size: 22px;
+  }
+  #MainMenu li:hover {
+    cursor: pointer;
+    color: #1faae2;
+  }
+  #MenuToggle input:checked ~ ul {
+    transform: translateX(300px);
+  }
 }
-.HeaderBottom ul li {
-  flex-grow: 1;
-  list-style-type: none;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  color: #6d6e71;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 27px;
-  height: 100%;
-}
-.HeaderBottom ul li:hover {
-  cursor: pointer;
-}
-.HeaderBottom li:not(:last-child) {
-  border-right: #b5b6b9 1px solid;
+@media screen and (min-width: 900px) {
+  #MenuToggle {
+    display: none;
+  }
+  #MainMenu {
+    height: 100%;
+    width: 100%;
+    display: flex;
+  }
+  #MainMenu li {
+    flex-grow: 1;
+    list-style-type: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    color: #494c4d;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 27px;
+    height: 100%;
+    transition: color 0.3s ease;
+  }
+  #MainMenu li:hover {
+    cursor: pointer;
+    color: #1faae2;
+  }
+
+  #MainMenu li:not(:last-child) {
+    border-right: #b5b6b9 1px solid;
+  }
 }
 .SearchLine {
   display: flex;
@@ -304,20 +387,6 @@ home-page .wrapper {
 .HomePage__pictures {
   display: flex;
   justify-content: flex-end;
-}
-.HomePage__pictures div {
-  min-width: 60px;
-  background-color: #f4f4f4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.HomePage__pictures div i {
-  border: solid rgb(175, 173, 173);
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 12px;
-  transform: rotate(-45deg);
 }
 .HomePage__text {
   position: relative;
@@ -449,7 +518,7 @@ what-we-do .wrapper {
   font-size: 44px;
   font-weight: 700;
   line-height: 24px;
-  margin: 10px 0;
+  margin: 15px 0;
 }
 .WhatWeDo__center p {
   color: #6d6e71;
@@ -500,22 +569,6 @@ our-projects .wrapper {
 }
 .ProjectComponent__links a {
   width: 15%;
-}
-.OurProjects_btns {
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-}
-.OurProjects_btns button {
-  width: 157px;
-  height: 45px;
-  border-radius: 5px;
-  margin: auto 8px;
-  color: #6d6e71;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 24px;
-  outline: none;
 }
 .ExcellentTeam__members {
   display: flex;
@@ -572,3 +625,162 @@ our-projects .wrapper {
   width: 25px;
   vertical-align: top;
 }
+
+.Modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  z-index: 1000;
+  overflow-y: scroll;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.Modal--opened {
+  display: block;
+}
+
+.Modal__content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  max-width: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 25px 15px;
+}
+
+.Modal__close {
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: transform linear 0.3s;
+  transform: scale(1);
+  position: fixed;
+  top: 10px;
+  right: 15px;
+  font-size: 26px;
+}
+
+.Modal__close:hover {
+  transform: scale(1.2);
+}
+.Modal__content label {
+  color: #6d6e71;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 24px;
+  max-width: 100px;
+  margin: 10px auto;
+}
+.Modal__content label:first-child {
+  margin-top: 0;
+}
+.Modal__content input {
+  color: #6d6e71;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 18px;
+  width: 200px;
+  margin: 0 auto;
+  outline: none;
+}
+#pass-2 {
+  margin-top: 20px;
+}
+#selectLabel {
+  max-width: 250px;
+  border-radius: 5px;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #c3c8ca;
+  font-size: 12px;
+  font-weight: 300;
+  padding: 5px 10px;
+  color: #494c4d;
+  transition: transform 0.3s ease;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#selectLabel:hover {
+  transform: scale(1.1);
+}
+.Modal__content img {
+  max-width: 40%;
+  max-height: 40%;
+  margin: 20px auto 10px;
+}
+.Hide {
+  position: absolute;
+  overflow: hidden;
+  z-index: -1;
+  width: 0, 1px;
+  height: 0.1px;
+  opacity: 0;
+}
+.AuthSubmitButton {
+  width: 120px;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 5px 15px;
+  color: white;
+  transition: transform 0.3s ease;
+  margin: 25px auto 0;
+  background-color: #1faae2;
+  outline: none;
+}
+.AuthSubmitButton:hover {
+  transform: scale(1.1);
+}
+.AuthButton {
+  max-width: 100px;
+  color: #494c4d;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px;
+  cursor: pointer;
+  border: none;
+  background-color: #eceef4;
+  transition: transform 0.2s ease;
+  outline: none;
+}
+.AuthButton:hover {
+  transform: scale(1.2);
+  border-radius: 10px;
+  background-color: #1faae2;
+}
+
+.FieldError {
+  width: 200px;
+  color: red;
+  font-size: 12px;
+  margin: 5px auto 0;
+}
+
+.UserInfo {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  color: #6d6e71;
+}
+
+.UserInfo h4 {
+  margin-right: 15px;
+}
+
+.UserInfo img {
+  border-radius: 50%;
+  max-height: 32px;
+  max-width: 32px;
+  margin-right: 15px;
+}
+

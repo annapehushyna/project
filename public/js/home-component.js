@@ -11,7 +11,6 @@ constructor(){
     <div class="HomePage__pictures">
     <img class="HomePage__img" src="./images/effective-art.jpg">
     <img class="HomePage__img" src="./images/phone-image.jpg">
-    <div><i></i></div>
     </div>
     </div>
     </main>

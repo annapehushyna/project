@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./project.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
     <title>ISAMA</title>
   </head>
   <body>
@@ -42,6 +45,19 @@
             <a href="#">
               <img src="./images/g+.svg" />
             </a>
+          </div>
+          <div class="HeaderTop__auth">
+            <div class="HeaderTop__authActions">
+              <register-user></register-user>
+              <span>or</span>
+              <log-in></log-in>
+            </div>
+
+            <section class="UserInfo">
+              <h4></h4>
+              <img />
+              <button class="AuthButton" onclick="logOut()">Log out</button>
+            </section>
           </div>
         </div>
       </div>
@@ -110,7 +126,20 @@
       <div class="HeaderBottom">
         <div class="wrapper">
           <nav>
-            <ul>
+            <div id="MenuToggle">
+              <input type="checkbox" hidden />
+              <span></span>
+              <span></span>
+              <span></span>
+              <ul id="MainMenu">
+                <li onclick="changeRoute('home-page')">HOME</li>
+                <li onclick="changeRoute('what-about')">What about ISAMA</li>
+                <li onclick="changeRoute('what-we-do')">What we do?</li>
+                <li onclick="changeRoute('our-projects')">Our Projects</li>
+                <li onclick="changeRoute('excellent-team')">Exellent Team</li>
+              </ul>
+            </div>
+            <ul id="MainMenu">
               <li onclick="changeRoute('home-page')">HOME</li>
               <li onclick="changeRoute('what-about')">What about ISAMA</li>
               <li onclick="changeRoute('what-we-do')">What we do?</li>
@@ -139,11 +168,7 @@
         </div>
       </div>
     </header>
-    <main class="MainContent">
-      <!-- <home-page></home-page> -->
-      <!-- <what-about> </what-about> -->
-      <!-- <what-we-do></what-we-do> -->
-    </main>
+    <main class="MainContent"></main>
     <footer>
       <div class="wrapper">
         <div class="Footer__social">
@@ -185,7 +210,7 @@
         </div>
       </div>
     </footer>
-    <script src="./project.js"></script>
+    <script src="./js/HeaderTop_component.js"></script>
     <script src="./js/home-component.js"></script>
     <script src="./js/whatAboutIsama_component.js"></script>
     <script src="./js/description_component.js"></script>
@@ -195,6 +220,9 @@
     <script src="./js/router.js"></script>
     <script src="./js/TeamMember_component.js"></script>
     <script src="./js/ExcellentTeam_component.js"></script>
-
+    <script src="./js/user.js"></script>
+    <script src="./js/RegisterUser_component.js"></script>
+    <script src="./js/Login_component.js"></script>
+    <script src="https://cdn.rawgit.com/chrisveness/crypto/4e93a4d/sha256.js"></script>
   </body>
 </html>
